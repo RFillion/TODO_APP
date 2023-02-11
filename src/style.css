@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Rossanova-Light";
+  src: url("./assets/fonts/rossanova/Rossanova-Light.otf");
+}
+
+@font-face {
+  font-family: "Rossanova-Regular";
+  src: url("./assets/fonts/rossanova/Rossanova-Regular.otf");
+}
+
+@font-face {
+  font-family: "Rossanova-Bold";
+  src: url("./assets/fonts/rossanova/Rossanova-Bold.otf");
+}
+
+@font-face {
+  font-family: "Rossanova-Black";
+  src: url("./assets/fonts/rossanova/Rossanova-Black.otf");
+}

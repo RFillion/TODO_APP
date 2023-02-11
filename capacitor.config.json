@@ -1,0 +1,6 @@
+{
+  "appId": "com.listo.app",
+  "appName": "Listo",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

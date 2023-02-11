@@ -9,8 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/browser": "^4.1.1",
+    "@capacitor/cli": "^4.6.3",
+    "@capacitor/core": "^4.6.3",
+    "@capacitor/ios": "^4.6.3",
+    "capacitor-plugin-safe-area": "^1.0.1",
+    "firebase": "^9.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-router-dom": "^6.8.1"
   },
   "devDependencies": {
