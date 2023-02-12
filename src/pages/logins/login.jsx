@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../../firebase-config';
 import { Link, useNavigate } from 'react-router-dom'
-import {motion as m} from 'framer-motion'
+import {motion as m, AnimatePresence} from 'framer-motion'
 import Notification from '../../components/notification';
 import Input from '../../components/input';
 import Button from '../../components/button';
@@ -12,10 +12,13 @@ export default function Login() {
   const [password, SetPassword] = useState('')
   const [error, SetError] = useState('')
 
+  const [isVisible, SetIsVisible] = useState(false)
+
   const navigate = useNavigate()
 
   const notification = (message) => {
     SetError(message)
+    setTimeout(() => SetIsVisible(false), 3000)
   }
 
   const login = async () => {
@@ -23,18 +26,23 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password)
       navigate('/home')
     } catch(err) {
-      if (err.code == 'auth/user-not-found') {notification('Email not found')}
-      else if (err.code == 'auth/wrong-password') {notification('Wrong password')}
-      else if (err.code == 'auth/too-many-requests') {notification('Too many failed attempts. Please reset your password, or try again later.')}
-      else {notification('Error. Please try again.')}
+      console.log(err.code)
+      if (err.code == 'auth/user-not-found') {notification('Email not found'); SetIsVisible(true)}
+      else if (err.code == 'auth/wrong-password') {notification('Wrong password'); SetIsVisible(true)}
+      else if (err.code == 'auth/too-many-requests') {notification('Too many failed attempts. Please reset your password, or try again later.'); SetIsVisible(true)}
+      else if (err.code == 'auth/invalid-email') {notification('Please enter a valid email'); SetIsVisible(true)}
+      else {notification('Error. Please try again.'); SetIsVisible(true)}
     }
   }
 
   return (
     <>
-      {
-        error !== '' && <Notification body={error} variant='error' />
-      }
+      <AnimatePresence>
+        {
+          isVisible &&
+          <Notification body={error} variant='error' />
+        }
+      </AnimatePresence>
       <m.section
         initial={{opacity: 0}}
         animate={{opacity: 1}}

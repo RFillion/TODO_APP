@@ -10,6 +10,7 @@ export default function Notification({body, variant}) {
     <m.div
       initial={{y: '-10px', x: '-50%', opacity: 0}}
       animate={{y: `${safeArea + 30}px`, x: '-50%', opacity: 1}}
+      exit={{x: '-50%', opacity: 0}}
       className={`absolute top-0 left-1/2 grid items-center gap-2 max-w-[80vw] w-max text-sm text-slate-900 bg-slate-400 px-5 py-3 pl-3 rounded-lg`}
       style={{gridTemplateColumns: 'auto 1fr'}}>
       {variant == 'error' ? <AiOutlineCloseCircle style={{width: '20px', height: '20px'}} /> : <AiOutlineCheckCircle style={{width: '20px', height: '20px'}} />}

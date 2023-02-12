@@ -21,3 +21,7 @@
   font-family: "Rossanova-Black";
   src: url("./assets/fonts/rossanova/Rossanova-Black.otf");
 }
+
+#root {
+  transition-timing-function: ease-in !important;
+}
