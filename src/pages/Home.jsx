@@ -1,39 +1,31 @@
-import { useState, useEffect } from 'react';
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
-
+import {auth} from '../firebase-config'
+import {onAuthStateChanged, signOut} from 'firebase/auth'
+import { useState } from 'react'
+import Button from '../components/button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
-  const [user, setUser] = useState('')
-  const navigate = useNavigate();
+  const [user, setUser] = useState({})
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user.displayName)
-      } else {
-        console.log('User logged out')
-      }
-    })
-  }, [])
+  const navigate = useNavigate()
 
-  const handleLogout = () => {               
-    signOut(auth).then(() => {
-    // Sign-out successful.
-      navigate("/");
-      console.log("Signed out successfully")
-    }).catch((error) => {
-      console.log(error)
-    });
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
+
+  const logout = async () => {
+    try {
+      await signOut(auth)
+      navigate('/')
+    } catch(err) {
+      console.log(err)
+    }
   }
-
-  SafeArea.getStatusBarHeight().then(({statusBarHeight}) => setSafeArea(statusBarHeight))
 
   return (
     <section className='container px-4 pt-4'>
-      Hello {user}
-      <button onClick={handleLogout}>Log out</button> 
+      Hello {user.displayName}
+      <Button onClick={logout}>Log out</Button> 
     </section>
   )
 }
