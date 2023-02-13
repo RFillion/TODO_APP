@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { auth } from '../firebase-config';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { motion as m } from 'framer-motion'
+import moment from 'moment';
+import {FiSettings} from 'react-icons/fi'
+import Settings from './settings/setting';
 import Sheet from 'react-modal-sheet'
 import Button from '../components/button';
 
@@ -29,14 +33,18 @@ export default function Home() {
   };
 
   return (
-    <section className="container px-4 pt-4">
-      Hello {user.displayName}
-      <Button onClick={logout}>Log out</Button> <br />
+    <m.section
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      className="container px-4 pt-10">
+      <div className='flex justify-between items-center'>
+        <h3 className='text-slate-600 text-sm'>{moment().format('dddd')} {moment().format('MMM Do')}</h3>
+        <div onClick={() => setIsShown(true)}><FiSettings className='stroke-slate-600 w-[20px] h-[20px]' /></div>
+      </div>
 
-      <Button onClick={() => setIsShown(true)}>Open sheet</Button>
+      <h1 className='text-slate-400 text-4xl mt-10'>List</h1>
 
       <Sheet
-        //rootId="root"
         ref={ref} 
         isOpen={isShown} 
         onClose={() => setIsShown(false)}
@@ -45,11 +53,11 @@ export default function Home() {
         <Sheet.Container style={{background: '#0c111b'}}>
           <Sheet.Header />
           <Sheet.Content>
-            <div className="mx-4 text-white">Voici une Sheet</div>
+            <Settings />
           </Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop />
       </Sheet>
-    </section>
+    </m.section>
   );
 }
