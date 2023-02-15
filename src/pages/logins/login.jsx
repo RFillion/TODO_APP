@@ -47,7 +47,7 @@ export default function Login() {
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         className='container flex flex-col justify-center items-center h-full mx-auto'>
-        <h1 className='font-rossanova-bk mb-10 text-5xl'>Listo</h1>
+        <h1 className='font-rossanova-bk mb-10 text-5xl text-slate-400'>Listo</h1>
         <div className='w-[80vw]'>
           <div className='flex flex-col gap-5'>
             <Input 

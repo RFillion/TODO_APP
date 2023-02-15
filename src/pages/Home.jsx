@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase-config';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { motion as m } from 'framer-motion'
 import moment from 'moment';
 import {FiSettings} from 'react-icons/fi'
@@ -23,15 +23,6 @@ export default function Home() {
     });
   }, []);
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <m.section
       initial={{opacity: 0}}
@@ -42,7 +33,7 @@ export default function Home() {
         <div onClick={() => setIsShown(true)}><FiSettings className='stroke-slate-600 w-[20px] h-[20px]' /></div>
       </div>
 
-      <h1 className='text-slate-400 text-4xl mt-10'>List</h1>
+      <h1 className='text-slate-400 text-4xl mt-10 font-rossanova-bk'>List</h1>
 
       <Sheet
         ref={ref} 
