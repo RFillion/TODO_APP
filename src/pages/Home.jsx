@@ -29,12 +29,12 @@ export default function Home() {
       animate={{opacity: 1}}
       className="container px-4 pt-10">
       <div className='flex justify-between items-center'>
-        <h3 className='text-slate-600 text-sm'>{moment().format('dddd')} {moment().format('MMM Do')}</h3>
-        <div onClick={() => setIsShown(true)}><FiSettings className='stroke-slate-600 w-[20px] h-[20px]' /></div>
+        <h3 className='text-slate-600 text-base'>{moment().format('dddd')} {moment().format('MMM Do')}</h3>
+        <div onClick={() => setIsShown(true)}><FiSettings className='stroke-slate-600 w-[23px] h-[23px]' /></div>
       </div>
 
-      <h1 className='text-slate-400 text-4xl mt-10 font-rossanova-bk'>List</h1>
-
+      <h1 className='text-slate-400 text-5xl mt-10 font-rossanova-bk'>List</h1>
+      {console.log(user)}
       <Sheet
         ref={ref} 
         isOpen={isShown} 
@@ -44,7 +44,7 @@ export default function Home() {
         <Sheet.Container style={{background: '#0c111b'}}>
           <Sheet.Header />
           <Sheet.Content>
-            <Settings />
+            <Settings {...user} />
           </Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop />

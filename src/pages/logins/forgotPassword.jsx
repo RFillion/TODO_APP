@@ -44,8 +44,8 @@ export default function forgotPassword() {
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         className="container flex flex-col justify-center items-center h-full mx-auto w-[80vw]">
-        <h1 className='font-rossanova-bk mb-5 text-5xl'>Recovery</h1>
-        <p className='text-sm text-center text-slate-400'>
+        <h1 className='font-rossanova-bk mb-5 text-5xl text-slate-400'>Recovery</h1>
+        <p className='text-sm text-center text-slate-600'>
           Forgot your password? That's okay! Please enter your email adress in the box below, and we will take care of you. 
         </p>
         <div className='flex flex-col gap-5 mt-5 w-full'>

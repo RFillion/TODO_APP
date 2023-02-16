@@ -51,7 +51,7 @@ export default function Signup() {
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         className="container flex flex-col justify-center items-center h-full mx-auto">
-        <h1 className="font-rossanova-bk mb-10 text-5xl">Sign Up</h1>
+        <h1 className="font-rossanova-bk mb-10 text-5xl text-slate-400">Sign Up</h1>
         <div className="w-[80vw]">
           <div className='flex flex-col gap-5'>
             <Input 

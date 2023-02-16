@@ -6,6 +6,8 @@ import {motion as m, AnimatePresence} from 'framer-motion'
 import Notification from '../../components/notification';
 import Input from '../../components/input';
 import Button from '../../components/button';
+/* import { Browser } from '@capacitor/browser';
+import {AiOutlineGoogle} from 'react-icons/ai' */
 
 export default function Login() {
   const [email, SetEmail] = useState('')
@@ -34,7 +36,7 @@ export default function Login() {
       else {notification('Error. Please try again.'); SetIsVisible(true)}
     }
   }
-
+  
   return (
     <>
       <AnimatePresence>
@@ -66,12 +68,26 @@ export default function Login() {
               onChange={(e) => SetPassword(e.target.value)} />
             <Button onClick={login}>Log in</Button>
           </div>
-          <p className='mt-5 text-sm text-center text-slate-400'>
+          <p className='mt-3 text-sm text-center text-slate-400'>
             <Link to='/forgotpassword'>Forgot password ?</Link>
           </p>
-          <p className='mt-5 text-xs text-center text-slate-600'>
+          <p className='mt-3 text-xs text-center text-slate-600'>
             You are new ?&nbsp;<Link to='/signup' className='text-slate-400'>Go to Sign up</Link> 
           </p>
+          {/* Sign in function to be added later down the line */}
+          {/* <p 
+            className="grid gap-5 items-center text-sm text-center text-slate-700 my-5 relative"
+            style={{gridTemplateColumns: '1fr auto 1fr'}}>
+            <span className='w-full h-[2px] bg-slate-700'></span>
+            Or
+            <span className='w-full h-[2px] bg-slate-700'></span>
+          </p>
+          <Button onClick={SignInWithApple}>
+            <div className='flex items-center justify-center gap-3'>
+              <AiOutlineGoogle style={{width: '1.25rem', height: '1.25rem'}} /> Log in with Apple
+            </div>
+          </Button> */}
+          {/* Sign in function to be added later down the line */}
         </div>
       </m.section>
     </>
