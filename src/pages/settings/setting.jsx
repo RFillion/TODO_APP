@@ -1,6 +1,13 @@
 import { useState, useRef } from 'react';
 import { auth } from '../../firebase-config';
-import {signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth'
+import {
+  signOut, 
+  updateEmail, 
+  updatePassword,
+  updateProfile,
+  reauthenticateWithCredential, 
+  EmailAuthProvider
+} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import {motion as m} from 'framer-motion'
 import { Capacitor } from '@capacitor/core';
@@ -13,6 +20,7 @@ import defaultIMG from '../../assets/images/user.jpg'
 import {MdEmail, MdInsertPhoto} from 'react-icons/md'
 import {FaLock, FaUserEdit} from 'react-icons/fa'
 import {BiLogOut} from 'react-icons/bi'
+import {AiOutlineUserDelete} from 'react-icons/ai'
 
 export default function Settings({photoURL, displayName, email}) {
   const navigate = useNavigate()
@@ -28,6 +36,9 @@ export default function Settings({photoURL, displayName, email}) {
 
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
+
+  const [newUsername, setNewUsername] = useState('')
+  const [usernamePassword, setUsernamePassword] = useState('')
 
   const ref = useRef();
   const snapTo = (i) => ref.current?.snapTo(i);
@@ -85,11 +96,15 @@ export default function Settings({photoURL, displayName, email}) {
         setShowPassword(false)
       } catch(err) {
         console.log(err.code)
+        if (err.code == 'auth/wrong-password') {alert('Wrong password')}
+        else if (err.code == 'auth/weak-password') {alert('Weak password. Please type at least 6 characters.')}
       }
+    } else {
+      alert('Password is wrong')
     }
   }
   
-  const updateUsername = () => {
+  const updateUsernameUser = () => {
     
   }
   
@@ -132,6 +147,11 @@ export default function Settings({photoURL, displayName, email}) {
         className={`absolute bottom-[20px] left-1/2 -translate-x-1/2 w-full px-4`}
         style={{paddingBottom: 'env(safe-area-inset-bottom)'}}>
         <div className='mt-5'>
+          <Button>
+            <div className="flex justify-center items-center gap-2">
+              <AiOutlineUserDelete style={{width: '18px', height: '18px'}} /> Delete account
+            </div>
+          </Button>
           <Button onClick={() => logout()}>
             <div className="flex justify-center items-center gap-2">
               <BiLogOut style={{width: '18px', height: '18px'}} /> Log out
@@ -217,7 +237,28 @@ export default function Settings({photoURL, displayName, email}) {
         open={showUsername}
         close={() => setShowUsername(false)}
         snapPoint={400}>
-        test Username
+        <div className="container px-4 pt-4 relative h-full">
+          <h1 className='text-slate-400 font-rossanova-bk text-2xl text-center mb-5'>Change Username</h1>
+          <div className="flex flex-col gap-3">
+            <Input 
+              type='text'
+              id='newUsername'
+              name='newUsername'
+              placeholder='New Username'
+              onChange={(e) => setNewUsername(e.target.value)} />
+            <Input 
+              type='text'
+              id='newUsernamePassword'
+              name='newUsernamePassword'
+              placeholder='Password'
+              onChange={(e) => setUsernamePassword(e.target.value)} />
+          </div>
+          <div
+            className={`absolute bottom-[20px] left-1/2 -translate-x-1/2 w-full px-4`}
+            style={{paddingBottom: 'env(safe-area-inset-bottom)'}}>
+            <Button onClick={updateUsernameUser}>Update Username</Button>
+          </div>
+        </div>
       </Sheets>
       
       <Sheets
