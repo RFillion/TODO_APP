@@ -38,7 +38,6 @@ export default function Settings({photoURL, displayName, email}) {
   const [newPassword, setNewPassword] = useState('')
 
   const [newUsername, setNewUsername] = useState('')
-  const [usernamePassword, setUsernamePassword] = useState('')
 
   const ref = useRef();
   const snapTo = (i) => ref.current?.snapTo(i);
@@ -104,8 +103,20 @@ export default function Settings({photoURL, displayName, email}) {
     }
   }
   
-  const updateUsernameUser = () => {
-    
+  const updateUsernameUser = async () => {
+    let newUsernameInput = document.querySelector('#newUsername')
+
+    if (newUsernameInput.value !== '') {
+      try {
+        await updateProfile(auth.currentUser, {displayName: newUsername})
+        alert('Username updated successfully')
+        setShowUsername(false)
+      } catch(err) {
+        console.log(err.code)
+      }
+    } else {
+      alert('Something is wrong.')
+    }
   }
   
   const updatePicture = () => {
@@ -246,12 +257,6 @@ export default function Settings({photoURL, displayName, email}) {
               name='newUsername'
               placeholder='New Username'
               onChange={(e) => setNewUsername(e.target.value)} />
-            <Input 
-              type='text'
-              id='newUsernamePassword'
-              name='newUsernamePassword'
-              placeholder='Password'
-              onChange={(e) => setUsernamePassword(e.target.value)} />
           </div>
           <div
             className={`absolute bottom-[20px] left-1/2 -translate-x-1/2 w-full px-4`}
